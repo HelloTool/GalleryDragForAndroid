@@ -1,6 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        release {
+            storeFile file('F:\\my\\programming\\Android\\签名\\Jesse205_v2.jks')
+            storePassword 'HamIxVn2kUvTpvd'
+            keyPassword 'HamIxVn2kUvTpvd'
+            keyAlias 'jesse205'
+        }
+    }
     compileSdkVersion 33
     buildToolsVersion "33.0.0"
     
@@ -10,6 +18,7 @@ android {
         targetSdkVersion 33
         versionCode 1
         versionName "1.0"
+        signingConfig signingConfigs.release
     }
 
     buildTypes {
