@@ -1,5 +1,8 @@
 # 图库拖放 Xposed 模块 | Gallery Drag Xposed Module
 
+[![star](https://gitee.com/Jesse205/GalleryDrag/badge/star.svg?theme=dark)](https://gitee.com/Jesse205/GalleryDrag/stargazers)
+[![fork](https://gitee.com/Jesse205/GalleryDrag/badge/fork.svg?theme=dark)](https://gitee.com/Jesse205/GalleryDrag/members)
+
 让图库 APP 支持拖放！
 
 Make Gallery APP support drag and drop!

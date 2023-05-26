@@ -3,6 +3,7 @@
 	
     <string-array name="xposed_scope">
         <item>com.android.gallery3d</item>
+        <item>com.simplemobiletools.gallery.pro</item>
     </string-array>
 	
 </resources>
