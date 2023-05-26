@@ -28,4 +28,5 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 	compileOnly fileTree(dir: 'libs/compile_only', include: ['*.jar'])
+    implementation 'org.lsposed.hiddenapibypass:hiddenapibypass:4.3'
 }

@@ -1,26 +1,26 @@
 package com.huawei.gallery.app;
 
+import com.jesse205.module.gallerydrag.ClassManager;
+
 import java.lang.reflect.Field;
 
-public class ActivityStateBridge {
-    private Object thisObj;
-    private final Class clazz;
-    private ClassLoader classLoader;
+import javabridge.lang.ObjectBridge;
+
+public class ActivityStateBridge extends ObjectBridge {
     private final Field mHostField;
     private GLHostBridge mHostBridge;
 
-    public ActivityStateBridge(Object activityState, ClassLoader classLoader) throws Throwable {
-        thisObj = activityState;
+    public ActivityStateBridge(Object activityState, ClassManager classManager) throws Throwable {
+        super(activityState,classManager);
 
-        clazz = classLoader.loadClass("com.huawei.gallery.app.ActivityState");
-        this.classLoader = classLoader;
+        Class<?> clazz = classManager.getClass("com.huawei.gallery.app.ActivityState");
         mHostField = clazz.getDeclaredField("mHost");
         mHostField.setAccessible(true);
     }
 
     public GLHostBridge getHostBridge() throws Throwable {
         if (mHostBridge == null)
-            mHostBridge = new GLHostBridge(getHostField(), classLoader);
+            mHostBridge = new GLHostBridge(getHostField(), classManager);
         return mHostBridge;
     }
 

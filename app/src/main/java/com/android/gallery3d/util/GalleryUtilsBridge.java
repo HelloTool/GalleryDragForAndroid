@@ -4,18 +4,20 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.net.Uri;
 
-import java.lang.reflect.InvocationTargetException;
+import com.jesse205.module.gallerydrag.ClassManager;
+
 import java.lang.reflect.Method;
 
-public class GalleryUtilsBridge {
-    private final Object thisObj;
+import javabridge.lang.ObjectBridge;
+
+public class GalleryUtilsBridge extends ObjectBridge {
     private final Class<?> clazz;
     private final Method convertFileUriToContentUri;
 
     @SuppressLint("PrivateApi")
-    public GalleryUtilsBridge(Object galleryUtils, ClassLoader classLoader) throws Throwable {
-        this.thisObj = galleryUtils;
-        this.clazz = classLoader.loadClass("com.android.gallery3d.util.GalleryUtils");
+    public GalleryUtilsBridge(Object galleryUtils, ClassManager classManager) throws Throwable {
+        super(galleryUtils, classManager);
+        this.clazz = classManager.getClass("com.android.gallery3d.util.GalleryUtils");
         convertFileUriToContentUri = clazz.getMethod("convertFileUriToContentUri", Context.class, Uri.class);
     }
 

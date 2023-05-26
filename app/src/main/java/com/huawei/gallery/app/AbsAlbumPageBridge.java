@@ -1,21 +1,19 @@
 package com.huawei.gallery.app;
 
 import com.android.gallery3d.ui.SelectionManagerBridge;
+import com.jesse205.module.gallerydrag.ClassManager;
 
 import java.lang.reflect.Field;
 
 public class AbsAlbumPageBridge extends ActivityStateBridge {
-    private final Class<?> clazz;
-    private final ClassLoader classLoader;
     private final Field mSelectionManagerField;
-    private final Object thisObj;
+    protected final Object thisObj;
     private SelectionManagerBridge mSelectionManagerBridge;
 
-    public AbsAlbumPageBridge(Object absAlbumPage, ClassLoader classLoader) throws Throwable {
-        super(absAlbumPage,classLoader);
-        this.classLoader = classLoader;
+    public AbsAlbumPageBridge(Object absAlbumPage, ClassManager classManager) throws Throwable {
+        super(absAlbumPage, classManager);
         this.thisObj = absAlbumPage;
-        clazz = classLoader.loadClass("com.huawei.gallery.app.AbsAlbumPage");
+        Class<?> clazz = classManager.getClass("com.huawei.gallery.app.AbsAlbumPage");
         mSelectionManagerField = clazz.getDeclaredField("mSelectionManager");
         mSelectionManagerField.setAccessible(true);
     }
@@ -23,7 +21,7 @@ public class AbsAlbumPageBridge extends ActivityStateBridge {
 
     public SelectionManagerBridge getSelectionManagerBridge() throws Throwable {
         if (mSelectionManagerBridge == null)
-            mSelectionManagerBridge = new SelectionManagerBridge(getSelectionManagerField(), classLoader);
+            mSelectionManagerBridge = new SelectionManagerBridge(getSelectionManagerField(), classManager);
         return mSelectionManagerBridge;
     }
 

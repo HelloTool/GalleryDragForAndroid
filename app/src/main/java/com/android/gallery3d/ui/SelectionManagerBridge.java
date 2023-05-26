@@ -2,23 +2,23 @@ package com.android.gallery3d.ui;
 
 import android.annotation.SuppressLint;
 
-import java.lang.reflect.InvocationTargetException;
+import com.jesse205.module.gallerydrag.ClassManager;
+
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 
-public class SelectionManagerBridge {
+import javabridge.lang.ObjectBridge;
+
+public class SelectionManagerBridge extends ObjectBridge {
     private final Class<?> clazz;
-    private final ClassLoader classLoader;
     private final Method getSelectedCount;
     private final Method getSelected;
-    private final Object thisObj;
 
 
     @SuppressLint("PrivateApi")
-    public SelectionManagerBridge(Object selectionManager, ClassLoader classLoader) throws Throwable {
-        this.thisObj = selectionManager;
-        this.classLoader = classLoader;
-        clazz = classLoader.loadClass("com.android.gallery3d.ui.SelectionManager");
+    public SelectionManagerBridge(Object selectionManager, ClassManager classManager) throws Throwable {
+        super(selectionManager, classManager);
+        clazz = classManager.getClass("com.android.gallery3d.ui.SelectionManager");
         getSelectedCount = clazz.getMethod("getSelectedCount");
         getSelected = clazz.getMethod("getSelected", boolean.class);
     }
@@ -35,6 +35,7 @@ public class SelectionManagerBridge {
             return 0;
     }
 
+    @SuppressWarnings("unchecked")
     public ArrayList<Object> getSelected(boolean expandSet) throws Throwable {
         return (ArrayList<Object>) getSelected.invoke(thisObj, true);
     }
