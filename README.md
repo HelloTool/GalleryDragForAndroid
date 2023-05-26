@@ -1,4 +1,4 @@
-# 图库拖放 Xposed 模块 | Gallery Xposed Module
+# 图库拖放 Xposed 模块 | Gallery Drag Xposed Module
 
 让图库 APP 支持拖放！
 
